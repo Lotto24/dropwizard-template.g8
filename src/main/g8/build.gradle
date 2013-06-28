@@ -6,7 +6,7 @@ apply plugin: "application"
 
 version = "$version$"
 group = "$group$"
-mainClassName="$group$.Main"
+mainClassName="$group$.helloworld.HelloWorldApplication"
 
 // additional source code dirs for acceptance-tests and integration-tests 
 def acceptanceSourceDir = 'src/acceptance-test/java'
