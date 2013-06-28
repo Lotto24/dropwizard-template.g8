@@ -1,0 +1,2 @@
+dropwizard-template.g8
+======================
