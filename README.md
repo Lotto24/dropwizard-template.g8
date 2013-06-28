@@ -1,7 +1,7 @@
-simple-gradle-java
+dropwizard-template
 ==================
 
-A [giter8][g8] template for java gradle] applications.
+A [giter8][g8] template for java gradle dropwizard applications.
 
 Includes
 
@@ -9,13 +9,13 @@ Includes
 * cobertura
 * checkstyle
 * integration-test source set
-* bdd-test source set with cucumber
+* acceptance-test source set with cucumber
 * fatJar support
 
 ##Usage
 Install [giter8][g8], then:
 
-    g8 matlockx/simple-gradle-java
+    g8 matlockx/dropwizard-template
 
 cd into your new project dir
 
@@ -24,10 +24,10 @@ cd into your new project dir
 
 ##Gradle Options
 ###BDD with cucumber
-Add features and sources to src/bdd-test/...
+Add features and sources to src/acceptance-test/...
 Then run
 
-    ./gradle bddTest
+    ./gradle acceptanceTest
 
 A dummy test is already there.
 ###Integration tests
