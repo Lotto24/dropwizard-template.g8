@@ -1,0 +1,25 @@
+    /**
+ * Run all tests (includes integration tests)
+ */
+task acceptanceTest(description: 'Runs the acceptance cucumber and junit tests.') {
+    dependsOn 'assemble', 'compileAcceptanceTestJava', 'processAcceptanceTestResources', 'acceptanceTestClasses'
+    doLast {
+
+        project.ext.htmlFormat = "html:\${project.buildDir}/reports/tests/acceptanceTest-report"
+        project.ext.junitFormat = "junit:\${project.buildDir}/reports/tests/acceptanceTest-report/junit.xml"
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath =files(sourceSets.acceptanceTest.output.classesDir) +
+                    sourceSets.acceptanceTest.compileClasspath + sourceSets.acceptanceTest.runtimeClasspath
+            args = [
+                '-f',
+                project.ext.htmlFormat,                
+                '-f',
+                project.ext.junitFormat,
+                '--glue',
+                '$group$',
+                'src/acceptance-test/resources'
+            ]
+        }
+    }
+}
