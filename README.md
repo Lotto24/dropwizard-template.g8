@@ -23,6 +23,13 @@ cd into your new project dir
     ./gradlew build
 
 ##Gradle Options
+###Dropwizard App
+
+Build and start application:   
+
+    ./gradlew installApp
+    build/install/your-project/bin/your-project server build/resources/main/example.yml
+    
 ###BDD with cucumber
 Add features and sources to src/acceptance-test/...
 Then run
