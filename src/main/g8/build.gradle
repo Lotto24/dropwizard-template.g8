@@ -77,10 +77,11 @@ dependencies{
 jar {
     dependsOn configurations.runtime
     if (project.ext.createFatJar){
-        from {
-            configurations.runtime.collect {
-                it.isDirectory() ? it : zipTree(it)
-            }
+        from (configurations.runtime.resolve().collect { it.isDirectory() ? it : zipTree(it) }) {
+            exclude 'META-INF/MANIFEST.MF'
+            exclude 'META-INF/*.SF'
+            exclude 'META-INF/*.DSA'
+            exclude 'META-INF/*.RSA'
         }
     }
     manifest {
