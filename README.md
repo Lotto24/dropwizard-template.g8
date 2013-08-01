@@ -21,7 +21,8 @@ cd into your new project dir
 
     chmod +x gradlew
     ./gradlew build
-    java -jar build/lib/your-project-version-farJar.jar db migrate example.yml
+    java -jar build/libs/your-project-version-farJar.jar db migrate example.yml
+    (there seems to be some bug, so you need to run it twice until the db changes are applied!?)
 
 ##Gradle Options
 ###Dropwizard App
