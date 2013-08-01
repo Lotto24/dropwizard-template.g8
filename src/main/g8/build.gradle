@@ -7,6 +7,15 @@ apply plugin: 'gradle-one-jar'
 
 version = "$version$"
 group = "$group$"
+
+// Use Java 7 by default
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+tasks.withType(Compile) {
+    options.encoding = 'UTF-8'
+}
+
 mainClassName="$group$.helloworld.HelloWorldApplication"
 
 // additional source code dirs for acceptance-tests and integration-tests 
