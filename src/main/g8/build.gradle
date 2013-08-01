@@ -3,6 +3,7 @@ apply plugin: "checkstyle"
 apply plugin: "eclipse"
 apply plugin: "idea"
 apply plugin: "application"
+apply plugin: 'gradle-one-jar'
 
 version = "$version$"
 group = "$group$"
@@ -14,6 +15,18 @@ def acceptanceResourceDir = 'src/acceptance-test/resources'
 
 def integrationTestSourceDir = 'src/integration-test/java'
 def integrationTestResourceDir = 'src/integration-test/resources'
+
+
+// Add Gradle OneJar Plugin, see https://github.com/rholder/gradle-one-jar
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.3'
+    }
+}
 
 project.ext{
     createFatJar = project.hasProperty('createFatJar') && ['on', 'true'].contains(project.properties.createFatJar)
@@ -156,6 +169,19 @@ test {
     //jvmArgs '-server', '-Xmx1g', '-XX:MaxPermSize=256m'
 }
 
+// Configure the oneJar task
+task oneJar(type: OneJar) {
+    mainClass = mainClassName
+}
+
+// Configure the run task to start the Dropwizard service
+run {
+    args 'server', './example.yml'
+}
+
+artifacts {
+    oneJar
+}
 
 tasks['checkstyleAcceptanceTest'].enabled = false
 tasks['checkstyleTest'].enabled = false
