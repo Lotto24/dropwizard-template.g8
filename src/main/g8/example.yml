@@ -15,7 +15,7 @@ database:
   password: sa
 
   # the JDBC URL
-  url: jdbc:hsqldb:target/example
+  url: jdbc:hsqldb:build/example;hsqldb.write_delay=false
 
   # override health check query for hsqldb
   # taken from http://javasplitter.blogspot.com/2011/01/keep-alive-query-in-hsqldb.html
