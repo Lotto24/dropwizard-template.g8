@@ -77,7 +77,7 @@ dependencies{
     compile 'com.yammer.dropwizard:dropwizard-migrations:' + libraryVersions.dw
     compile 'org.hsqldb:hsqldb:2.2.9'
     
-    testCompile 'com.yammer.dropwizard:dropwizard-testing' + libraryVersions.dw
+    testCompile 'com.yammer.dropwizard:dropwizard-testing:' + libraryVersions.dw
     testCompile 'junit:junit-dep:' + libraryVersions.junit
     testCompile 'org.hamcrest:hamcrest-library:' + libraryVersions.hamcrest
     testCompile "org.mockito:mockito-core:" + libraryVersions.mockito
