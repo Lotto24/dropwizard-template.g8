@@ -179,6 +179,13 @@ run {
     args 'server', './example.yml'
 }
 
+task(runDebug, dependsOn: 'classes', type: JavaExec) {
+    main = "\$mainClassName"
+    args 'server', './example.yml'
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs = ["-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"]
+}
+
 artifacts {
     oneJar
 }
