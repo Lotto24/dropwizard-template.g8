@@ -21,14 +21,14 @@ cd into your new project dir
 
     chmod +x gradlew
     ./gradlew build
+    java -jar build/libs/your-project-version-farJar.jar db migrate example.yml
+    (there seems to be some bug, so you need to run it twice until the db changes are applied!?)
 
 ##Gradle Options
 ###Dropwizard App
 
 Build and start application:   
-
-    ./gradlew installApp
-    build/install/your-project/bin/your-project server build/resources/main/example.yml
+	./gradlew run
     
 ###BDD with cucumber
 Add features and sources to src/acceptance-test/...
@@ -41,14 +41,14 @@ A dummy test is already there.
 Add junit tests to src/integration-test/java
 Then run
 
-    ./gradle build -PuseIntegrationTest=true
+    ./gradlew build -PuseIntegrationTest=true
 
 ###Cobertura
     ./gradlew build -PuseCodeCoverage=true
 ###FindBugs
     ./gradlew build -PuseFindbugs=true
 ###FatJar
-    ./gradlew build -PcreateFatJar=true
+    ./gradlew fatJar
 
 You can also combine these switches.
 
