@@ -15,7 +15,7 @@ Includes
 ##Usage
 Install [giter8][g8], then:
 
-    g8 matlockx/dropwizard-template
+    g8 esailors/dropwizard-template
 
 cd into your new project dir
 
