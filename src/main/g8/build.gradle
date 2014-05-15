@@ -39,8 +39,6 @@ project.ext{
     }
 }
 
-if(project.ext.useFindbugs)
-    apply plugin: 'findbugs'
 
 def gradleWrapperVersion = "$gradle_version$"
 task wrapper(type: Wrapper) { gradleVersion = gradleWrapperVersion }
@@ -55,30 +53,30 @@ repositories {
 
 // some global library versions for our dependencies
 project.ext.libraryVersions = [
-                junit: '4.10', 
-                mockito: '1.9.0', 
-                logback: '1.0.7',
-                hamcrest: '1.3.RC2',
-                cobertura: '1.9.3',
-                slf4j: '1.6.6',
-                dw: '0.6.2',
+                junit: '4.11',
+                mockito: '1.9.5',
+                logback: '1.1.2',
+                hamcrest: '1.3',
+                cobertura: '2.0.3',
+                slf4j: '1.7.7',
+                dw: '0.7.0',
             ]
 
 
 
 dependencies{    
-    compile 'com.yammer.dropwizard:dropwizard-core:' + libraryVersions.dw
-    compile 'com.yammer.dropwizard:dropwizard-auth:' + libraryVersions.dw
-    compile 'com.yammer.dropwizard:dropwizard-hibernate:' + libraryVersions.dw
-    compile 'com.yammer.dropwizard:dropwizard-migrations:' + libraryVersions.dw
-    compile 'org.hsqldb:hsqldb:2.2.9'
+    compile 'io.dropwizard:dropwizard-core:' + libraryVersions.dw
+    compile 'io.dropwizard:dropwizard-auth:' + libraryVersions.dw
+    compile 'io.dropwizard:dropwizard-hibernate:' + libraryVersions.dw
+    compile 'io.dropwizard:dropwizard-migrations:' + libraryVersions.dw
+    compile 'org.hsqldb:hsqldb:2.3.2'
     
     testCompile 'com.yammer.dropwizard:dropwizard-testing:' + libraryVersions.dw
     testCompile 'junit:junit-dep:' + libraryVersions.junit
     testCompile 'org.hamcrest:hamcrest-library:' + libraryVersions.hamcrest
     testCompile "org.mockito:mockito-core:" + libraryVersions.mockito
-    testCompile "info.cukes:cucumber-java:1.1.3"
-    testCompile "info.cukes:cucumber-junit:1.1.3"
+    testCompile "info.cukes:cucumber-java:1.1.6"
+    testCompile "info.cukes:cucumber-junit:1.1.6"
 }
 
 task fatJar(type: Jar) {
@@ -124,7 +122,7 @@ configurations {
 
 test {
     if (project.ext.useCodeCoverage) {
-        apply from: "\${projectDir}/cobertura.gradle"
+        apply from: "\${projectDir}/gradle/check.gradle"
     }
 
 
@@ -136,7 +134,7 @@ test {
 
     // only apply acceptance task when features are available
     if(new File("\${projectDir}/src/acceptance-test/resources").exists()){
-        apply from: "\${projectDir}/cucumber.gradle"
+        apply from: "\${projectDir}/gradle/cucumber.gradle"
     }
 
 
