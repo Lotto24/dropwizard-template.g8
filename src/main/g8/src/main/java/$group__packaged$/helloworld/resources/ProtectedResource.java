@@ -1,7 +1,7 @@
-package org.example.helloworld.resources;
+package $group$.helloworld.resources;
 
-import com.yammer.dropwizard.auth.Auth;
-import org.example.helloworld.core.User;
+import $group$.helloworld.core.User;
+import io.dropwizard.auth.Auth;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

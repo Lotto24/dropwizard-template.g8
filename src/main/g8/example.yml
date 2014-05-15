@@ -6,7 +6,7 @@ defaultName: Stranger
 database:
 
   # the name of your JDBC driver
-  driverClass: org.hsqldb.jdbc.JDBCDriver
+  driverClass: org.h2.Driver
 
   # the username
   user: sa
@@ -15,11 +15,7 @@ database:
   password: sa
 
   # the JDBC URL
-  url: jdbc:hsqldb:build/example;hsqldb.write_delay=false
-
-  # override health check query for hsqldb
-  # taken from http://javasplitter.blogspot.com/2011/01/keep-alive-query-in-hsqldb.html
-  validationQuery: SELECT * FROM INFORMATION_SCHEMA.SYSTEM_TABLES
+  url: jdbc:h2:target/example
 
 # use the simple server factory if you only want to run on a single port
 #server:
@@ -28,6 +24,31 @@ database:
 #    type: http
 #    port: 8080
 
+server:
+#  softNofileLimit: 1000
+#  hardNofileLimit: 1000
+  applicationConnectors:
+    - type: http
+      port: 8080
+    - type: https
+      port: 8443
+      keyStorePath: example.keystore
+      keyStorePassword: example
+      validateCerts: false
+# this requires the npn-boot library on the JVM's boot classpath
+#    - type: spdy3
+#      port: 8445
+#      keyStorePath: example.keystore
+#      keyStorePassword: example
+#      validateCerts: false
+  adminConnectors:
+    - type: http
+      port: 8081
+    - type: https
+      port: 8444
+      keyStorePath: example.keystore
+      keyStorePassword: example
+      validateCerts: false
 
 # Logging settings.
 logging:
@@ -43,3 +64,5 @@ logging:
 
     org.hibernate.SQL: ALL
 
+  appenders:
+    - type: console

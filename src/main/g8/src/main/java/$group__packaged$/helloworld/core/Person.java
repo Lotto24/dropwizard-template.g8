@@ -1,4 +1,4 @@
-package org.example.helloworld.core;
+package $group$.helloworld.core;
 
 import javax.persistence.*;
 
@@ -6,11 +6,11 @@ import javax.persistence.*;
 @Table(name = "people")
 @NamedQueries({
     @NamedQuery(
-        name = "org.example.helloworld.core.Person.findAll",
+        name = "$group$.helloworld.core.Person.findAll",
         query = "SELECT p FROM Person p"
     ),
     @NamedQuery(
-        name = "org.example.helloworld.core.Person.findById",
+        name = "$group$.helloworld.core.Person.findById",
         query = "SELECT p FROM Person p WHERE p.id = :id"
     )
 })

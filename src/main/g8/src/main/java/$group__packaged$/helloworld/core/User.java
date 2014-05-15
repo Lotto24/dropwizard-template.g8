@@ -1,4 +1,4 @@
-package org.example.helloworld.core;
+package $group$.helloworld.core;
 
 public class User {
     private final String name;

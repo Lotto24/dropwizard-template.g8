@@ -1,8 +1,8 @@
-package org.example.helloworld.resources;
+package $group$.helloworld.resources;
 
-import com.yammer.dropwizard.hibernate.UnitOfWork;
-import org.example.helloworld.core.Person;
-import org.example.helloworld.db.PersonDAO;
+import $group$.helloworld.core.Person;
+import $group$.helloworld.db.PersonDAO;
+import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;

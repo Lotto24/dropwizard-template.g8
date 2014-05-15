@@ -1,4 +1,4 @@
-package org.example.helloworld.core;
+package $group$.helloworld.core;
 
 import com.google.common.base.Optional;
 

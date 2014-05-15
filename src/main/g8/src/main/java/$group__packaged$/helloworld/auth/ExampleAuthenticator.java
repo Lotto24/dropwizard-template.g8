@@ -1,12 +1,10 @@
-package org.example.helloworld.auth;
+package $group$.helloworld.auth;
 
-import com.yammer.dropwizard.auth.AuthenticationException;
-import com.yammer.dropwizard.auth.Authenticator;
-import com.yammer.dropwizard.auth.basic.BasicCredentials;
-
-import org.example.helloworld.core.User;
-
+import $group$.helloworld.core.User;
 import com.google.common.base.Optional;
+import io.dropwizard.auth.AuthenticationException;
+import io.dropwizard.auth.Authenticator;
+import io.dropwizard.auth.basic.BasicCredentials;
 
 public class ExampleAuthenticator implements Authenticator<BasicCredentials, User> {
     @Override

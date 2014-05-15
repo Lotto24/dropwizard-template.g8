@@ -1,17 +1,15 @@
-package org.example.helloworld.cli;
+package $group$.helloworld.cli;
 
+import $group$.helloworld.HelloWorldConfiguration;
+import $group$.helloworld.core.Template;
+import com.google.common.base.Optional;
+import io.dropwizard.cli.ConfiguredCommand;
+import io.dropwizard.setup.Bootstrap;
 import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
-
-import org.example.helloworld.HelloWorldConfiguration;
-import org.example.helloworld.core.Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.common.base.Optional;
-import com.yammer.dropwizard.cli.ConfiguredCommand;
-import com.yammer.dropwizard.config.Bootstrap;
 
 public class RenderCommand extends ConfiguredCommand<HelloWorldConfiguration> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RenderCommand.class);
@@ -47,5 +45,4 @@ public class RenderCommand extends ConfiguredCommand<HelloWorldConfiguration> {
             }
         }
     }
-
 }

@@ -1,15 +1,13 @@
-package org.example.helloworld;
+package $group$.helloworld;
+
+import $group$.helloworld.core.Template;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.dropwizard.Configuration;
+import io.dropwizard.db.DataSourceFactory;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
-import org.example.helloworld.core.Template;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.yammer.dropwizard.config.Configuration;
-import com.yammer.dropwizard.db.DatabaseConfiguration;
-import com.yammer.dropwizard.db.ManagedDataSourceFactory;
 
 public class HelloWorldConfiguration extends Configuration {
     @NotEmpty
@@ -20,13 +18,8 @@ public class HelloWorldConfiguration extends Configuration {
 
     @Valid
     @NotNull
-    private ManagedDataSourceFactory database = new ManagedDataSourceFactory();
+    private DataSourceFactory database = new DataSourceFactory();
 
-
-    @Valid
-    @NotNull
-    private DatabaseConfiguration databaseConfig = new DatabaseConfiguration();
-    
     @JsonProperty
     public String getTemplate() {
         return template;
@@ -52,12 +45,12 @@ public class HelloWorldConfiguration extends Configuration {
     }
 
     @JsonProperty("database")
-    public DatabaseConfiguration getDataBaseConfig() {
-        return databaseConfig;
+    public DataSourceFactory getDataSourceFactory() {
+        return database;
     }
 
     @JsonProperty("database")
-    public void setDataBaseConfig(DatabaseConfiguration databaseConfig) {
-        this.databaseConfig = databaseConfig;
+    public void setDataSourceFactory(DataSourceFactory dataSourceFactory) {
+        this.database = dataSourceFactory;
     }
 }

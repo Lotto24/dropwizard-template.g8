@@ -1,8 +1,8 @@
-package org.example.helloworld.db;
+package $group$.helloworld.db;
 
-import com.yammer.dropwizard.hibernate.AbstractDAO;
-import org.example.helloworld.core.Person;
+import $group$.helloworld.core.Person;
 import com.google.common.base.Optional;
+import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -21,6 +21,6 @@ public class PersonDAO extends AbstractDAO<Person> {
     }
 
     public List<Person> findAll() {
-        return list(namedQuery("org.example.helloworld.core.Person.findAll"));
+        return list(namedQuery("$group$.helloworld.core.Person.findAll"));
     }
 }

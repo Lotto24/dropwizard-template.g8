@@ -1,4 +1,4 @@
-package org.example.helloworld.core;
+package $group$.helloworld.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
