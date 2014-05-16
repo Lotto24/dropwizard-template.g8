@@ -1,4 +1,5 @@
 
 dependencies {
     classpath 'com.mapvine:gradle-cobertura-plugin:0.1'
+    classpath('com.terrafolio:gradle-jenkins-plugin:1.0.0')
 }

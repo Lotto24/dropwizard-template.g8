@@ -1,0 +1,125 @@
+apply plugin: 'jenkins'
+
+jenkins {
+
+  servers {
+     local { 
+       // FIXME: we must parametrize these values:
+       url 'http://localhost:8080'
+       username "admin"
+       password "admin"
+     }
+  }
+
+  defaultServer servers.local
+ 
+  jobs {
+    metaJob {
+        dsl {
+          name "Create Jobs for \${project.name}"
+          description "Meta job to create/update the Jenkins jobs for \${project.name}.<br>\nSee https://github.com/ghale/gradle-jenkins-plugin/wiki for DSL syntax."
+
+          steps {
+            gradle('./gradlew updateJenkinsJobs')
+          }
+
+          scm {
+            // FIXME: need to parametrize Git remote URL!
+            git ('$git_repository$') { node ->
+              (node / 'extensions' / 'hudson.plugins.git.extensions.impl.PathRestriction') << includedRegions('gradle_inc/jenkins.gradle')
+              (node / 'extensions' / 'hudson.plugins.git.extensions.impl.PathRestriction') << excludedRegions()
+            }
+          }
+
+          triggers {
+              scm('H/10 * * * *')
+          }
+
+          publishers {
+            extendedEmail('\$DEFAULT_RECIPIENTS', '\$DEFAULT_SUBJECT', '\$DEFAULT_CONTENT') {
+              trigger(triggerName: 'Failure', sendToDevelopers: true, sendToRequester: true, includeCulprits: true, sendToRecipientList: false)
+            }
+
+            allowBrokenBuildClaiming()
+          }
+
+          // discard old builds:
+          logRotator(7, 49) // daysToKeep, numBuildsToKeep 
+        }
+      }
+
+    compile {
+      //server servers.local
+      dsl {
+        name "Compile + Test for \${project.name}"
+        description "Compiles \${project.name} and runs the unit test"
+
+        steps {
+           gradle('clean build')
+        }
+
+        scm {
+          git ('$git_repository$')
+        }
+
+        triggers {
+          scm('H/10 * * * *')
+        }
+
+        publishers {
+          archiveJunit('build/test-results/**/*.xml', false, true, false) // glob, retainLongStdout, allowClaiming, publishTestAttachements
+          archiveArtifacts 'build/libs/**/*.*ar'
+
+          extendedEmail('\$DEFAULT_RECIPIENTS', '\$DEFAULT_SUBJECT', '\$DEFAULT_CONTENT') {
+              trigger(triggerName: 'Failure', sendToDevelopers: true, sendToRequester: true, includeCulprits: true, sendToRecipientList: false)
+              trigger(triggerName: 'StillFailing', sendToDevelopers: true, sendToRequester: true, includeCulprits: true, sendToRecipientList: false)
+              trigger(triggerName: 'Fixed', sendToDevelopers: true, sendToRequester: true, includeCulprits: true, sendToRecipientList: false)
+          }
+
+          downstream("Integration Test for \${project.name}", "SUCCESS")
+
+          allowBrokenBuildClaiming()
+        }
+
+        // discard old builds:
+        logRotator(7, 49) // daysToKeep, numBuildsToKeep 
+
+      }
+    }
+
+    integrationTest {
+      //server servers.local
+      dsl {
+        name "Integration Test for \${project.name}"
+        description "Runs integration tests for \${project.name}"
+
+        steps {
+           gradle('./gradlew clean integrationTest')
+        }
+
+        scm {
+          git ('$git_repository$')
+        }
+
+        publishers {
+          archiveJunit('build/test-results/**/*.xml', false, true, false) // glob, retainLongStdout, allowClaiming, publishTestAttachements
+
+          extendedEmail('\$DEFAULT_RECIPIENTS', '\$DEFAULT_SUBJECT', '\$DEFAULT_CONTENT') {
+              trigger(triggerName: 'Failure', sendToDevelopers: true, sendToRequester: true, includeCulprits: true, sendToRecipientList: false)
+              trigger(triggerName: 'StillFailing', sendToDevelopers: true, sendToRequester: true, includeCulprits: true, sendToRecipientList: false)
+              trigger(triggerName: 'Fixed', sendToDevelopers: true, sendToRequester: true, includeCulprits: true, sendToRecipientList: false)
+          }
+
+          allowBrokenBuildClaiming()
+        }
+
+        blockOnUpstreamProjects()
+
+        // discard old builds:
+        logRotator(7, 49) // daysToKeep, numBuildsToKeep 
+
+      }
+    }
+  }
+
+}
