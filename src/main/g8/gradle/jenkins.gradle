@@ -33,6 +33,7 @@ jenkins {
 
           triggers {
               scm('H/10 * * * *')
+              cron('@daily') // run once daily to overwrite any changes done to the jobs which weren't tracked here
           }
 
           publishers {
