@@ -24,9 +24,8 @@ jenkins {
           }
 
           scm {
-            // FIXME: need to parametrize Git remote URL!
             git ('$git_repository$') { node ->
-              (node / 'extensions' / 'hudson.plugins.git.extensions.impl.PathRestriction') << includedRegions('gradle_inc/jenkins.gradle')
+              (node / 'extensions' / 'hudson.plugins.git.extensions.impl.PathRestriction') << includedRegions('gradle/jenkins.gradle')
               (node / 'extensions' / 'hudson.plugins.git.extensions.impl.PathRestriction') << excludedRegions()
             }
           }
