@@ -3,7 +3,7 @@ apply plugin: 'jenkins'
 jenkins {
 
   servers {
-     local { 
+     local {
        // FIXME: we must parametrize these values:
        url 'http://localhost:8080'
        username "admin"
@@ -12,7 +12,7 @@ jenkins {
   }
 
   defaultServer servers.local
- 
+
   jobs {
     metaJob {
         dsl {
@@ -20,7 +20,7 @@ jenkins {
           description "Meta job to create/update the Jenkins jobs for \${project.name}.<br>\nSee https://github.com/ghale/gradle-jenkins-plugin/wiki for DSL syntax."
 
           steps {
-            gradle('./gradlew updateJenkinsJobs')
+            gradle('updateJenkinsJobs')
           }
 
           scm {
@@ -44,7 +44,7 @@ jenkins {
           }
 
           // discard old builds:
-          logRotator(7, 49) // daysToKeep, numBuildsToKeep 
+          logRotator(7, 49) // daysToKeep, numBuildsToKeep
         }
       }
 
@@ -68,7 +68,7 @@ jenkins {
 
         publishers {
           archiveJunit('build/test-results/**/*.xml', false, true, false) // glob, retainLongStdout, allowClaiming, publishTestAttachements
-          archiveArtifacts 'build/libs/**/*.*ar'
+          archiveArtifacts('build/libs/**/*.*ar')
 
           extendedEmail('\$DEFAULT_RECIPIENTS', '\$DEFAULT_SUBJECT', '\$DEFAULT_CONTENT') {
               trigger(triggerName: 'Failure', sendToDevelopers: true, sendToRequester: true, includeCulprits: true, sendToRecipientList: false)
@@ -82,7 +82,7 @@ jenkins {
         }
 
         // discard old builds:
-        logRotator(7, 49) // daysToKeep, numBuildsToKeep 
+        logRotator(7, 49) // daysToKeep, numBuildsToKeep
 
       }
     }
@@ -94,7 +94,7 @@ jenkins {
         description "Runs integration tests for \${project.name}"
 
         steps {
-           gradle('./gradlew clean integrationTest')
+           gradle('clean build', '-PuseIntegrationTest=true')
         }
 
         scm {
@@ -116,7 +116,7 @@ jenkins {
         blockOnUpstreamProjects()
 
         // discard old builds:
-        logRotator(7, 49) // daysToKeep, numBuildsToKeep 
+        logRotator(7, 49) // daysToKeep, numBuildsToKeep
 
       }
     }
