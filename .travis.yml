@@ -1,7 +1,9 @@
 ---
 language: java
 before_install:
-- curl https://raw.githubusercontent.com/n8han/conscript/master/setup.sh | sh
+- wget https://raw.githubusercontent.com/n8han/conscript/master/setup.sh
+- chmod +x setup.sh
+- ./setup.sh
 - cs n8han/giter8
 - g8 file://`pwd`
 - cd test-project
