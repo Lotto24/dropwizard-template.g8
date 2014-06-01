@@ -17,6 +17,7 @@ Install [giter8][g8], then:
 
     g8 esailors/dropwizard-template
 
+
 cd into your new project dir
 
     chmod +x gradlew
