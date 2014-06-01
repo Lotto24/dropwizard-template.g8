@@ -3,12 +3,7 @@ language: java
 before_install:
 - curl https://raw.githubusercontent.com/n8han/conscript/master/setup.sh | sh
 - cs n8han/giter8
-- g8 file://`pwd` <<EOF
-
-
-
-
-EOF
+- g8 file://`pwd`
 - cd test-project
 install: true
 script: ./gradlew test
