@@ -5,8 +5,7 @@ before_install:
 - ./test-install-g8.sh
 install: true
 script: 
-- pwd
-- ls -la
+- cd test-project
 - ./gradlew test
 jdk:
 - oraclejdk7
