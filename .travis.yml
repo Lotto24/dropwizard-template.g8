@@ -10,3 +10,7 @@ script:
 - ./gradlew test
 jdk:
 - oraclejdk7
+notifications:
+  email:
+    - Martin.Joehren@esailors.de
+    - Christoph.Kutzinski@esailors.de
