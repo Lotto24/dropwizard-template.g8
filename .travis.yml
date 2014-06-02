@@ -6,6 +6,7 @@ before_install:
 install: true
 script: 
 - cd test-project
+- chmod +x gradlew
 - ./gradlew test
 jdk:
 - oraclejdk7
