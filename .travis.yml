@@ -1,6 +1,8 @@
 ---
 language: java
-before_install: ./test-install-g8.sh
+before_install:
+- chmod +x test-install-g8.sh
+- ./test-install-g8.sh
 install: true
 script: ./gradlew test
 jdk:
