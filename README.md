@@ -1,5 +1,6 @@
 dropwizard-template
 ==================
+[![Build Status](https://travis-ci.org/eSailors/dropwizard-template.g8.svg?branch=master)](https://travis-ci.org/eSailors/dropwizard-template.g8)
 
 A [giter8][g8] template for java gradle dropwizard applications.
 
