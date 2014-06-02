@@ -1,7 +1,6 @@
 ---
 language: java
 before_install: ./test-install-g8.sh
-- cd test-project
 install: true
 script: ./gradlew test
 jdk:
