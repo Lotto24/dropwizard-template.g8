@@ -4,6 +4,9 @@ before_install:
 - chmod +x test-install-g8.sh
 - ./test-install-g8.sh
 install: true
-script: ./gradlew test
+script: 
+- pwd
+- ls -la
+- ./gradlew test
 jdk:
 - oraclejdk7
